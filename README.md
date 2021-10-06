@@ -63,11 +63,14 @@ INSERT INTO comment_mapping (id, child_comment_id) VALUES(1, 2);
 INSERT INTO comment_mapping (id, child_comment_id) VALUES(1, 3);
 INSERT INTO comment_mapping (id, child_comment_id) VALUES(2, 4);
 
+DECLARE @input_comment_id AS INT
+SET @input_comment_id = 4
+
 ;WITH cte_comment AS (
   -- step 1: we insert required child row into the cte, with initial row level = 1
   SELECT id, 1 AS [level]
   FROM comment_mapping
-  WHERE child_comment_id = 4
+  WHERE child_comment_id = @input_comment_id
 
   UNION ALL
 
