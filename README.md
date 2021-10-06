@@ -38,7 +38,7 @@ id   |   child_comment_id
 post 1 <-> N comment
 comment 1 <-> N comment
 ```
-**Note**: I also realized that we don't need comment_mapping table. We can just use parent_comment_id in the comment table. And if we're building something like reddit, probably don't need the comment table either! We can have the `post` table like this:  
+**Note**: I also realized that we don't need comment_mapping table. We can just use `parent_comment_id` in the comment table. And if we're building something like reddit, probably don't need the comment table either! We can have the `post` table like this:  
 ```
 -----------------------------------------------------------------------
 id   |   title    |   text     |   created_date     |   parent_post_id
