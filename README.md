@@ -1,20 +1,38 @@
 # DB solution
 
 ## Schema
-```sql
+```
+
 post(id: BIGINT, title: VARCHAR(100), description: VARCHAR(1000), created_date: DATETIME)
-     1           example_title        sample_description          2021-10-04T00:00:00
 
-comment(id: BIGINT, text: VARCHAR(200), postId: BIGINT FK post(id))   
-        1           comment1              1   
-        2           comment1.1            1   
-        3           comment1.2            1   
-        4           comment1.1.1          1   
+----------------------------------------------------------
+id   |   title    |   description  |   created_date 
+----------------------------------------------------------
+1    |   title1   |   sample_desc  |   2021-10-04T00:00:00
+```
 
+```
+comment(id: BIGINT, text: VARCHAR(200), postId: BIGINT FK post(id))  
+
+-------------------------------------
+id   |   text            |   post_id
+-------------------------------------
+1    |   comment1        |   1
+2    |   comment1.1      |   1
+3    |   comment1.2      |   1
+4    |   comment1.1.1    |   1
+
+```
+
+```
 comment_mapping(id: BIGINT, child_comment_id: BIGINT)   
-                1            2   
-                1            3   
-                2            4   
+
+-------------------------
+id   |   child_comment_id
+-------------------------
+1    |   2       
+1    |   3   
+2    |   4   
 ```
 ```
 post 1 <-> N comment
@@ -22,6 +40,7 @@ comment 1 <-> N comment
 ```
 **Note**: I also realized that we don't need comment_mapping table. We can just use parent_comment_id in the comment table. And if we're building something like reddit, probably don't need the comment table either! We can have the `post` table like this:  
 ```
+-----------------------------------------------------------------------
 id   |   title    |   text     |   created_date     |   parent_post_id
 -----------------------------------------------------------------------
 1    |   title1   |   text1    |   created_date1    |   null
